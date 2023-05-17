@@ -28,21 +28,16 @@ Examples:
 
 function vowelCount(str) {
     const vowels = ['a', 'e', 'i', 'o', 'u'];
-    const count = {};
-    str = str.toLowerCase();
-    for (let char of str) {
-      if (vowels.includes(char)) {
-        if (count[char]) {
-          count[char]++;
-        } else {
-        
-
-          count[char] = 1;
-        }
-      }
-    }
   
-    return count;
+    return str.split('').reduce((count, char) => {
+      const lowercaseChar = char.toLowerCase();
+      
+      if (vowels.includes(lowercaseChar)) {
+        count[lowercaseChar] = (count[lowercaseChar] || 0) + 1;
+      }
+      
+      return count;
+    }, {});
   }
 
 /*
