@@ -7,10 +7,11 @@ Examples:
 */
 
 function extractValue(arr, key) {
-    return arr.reduce(function(acc,next){
-        acc.push(next[key]);
-        return acc;
-    });  
+    let extractArr= [];
+     arr.forEach(element => {
+        extractArr.push(element[key])
+     });
+    return extractArr;  
    
 }
 
@@ -25,21 +26,24 @@ Examples:
     vowelCount('I Am awesome and so are you') // {i: 1, a: 4, e: 3, o: 3, u: 1};
 */
 
-function vowelCount(str){
-    const vowels = "aeiou";
-     return str.split('').reduce(function(acc,next){
-       let lowerCased =next.toLowerCased(); 
-       if(vowels.indexOf(lowerCased) !== -1){
-            if (acc[lowerCased]){
-                acc[lowerCased] ++;
-            } else {
-                acc[lowerCased] = 1
-            }
+function vowelCount(str) {
+    const vowels = ['a', 'e', 'i', 'o', 'u'];
+    const count = {};
+    str = str.toLowerCase();
+    for (let char of str) {
+      if (vowels.includes(char)) {
+        if (count[char]) {
+          count[char]++;
+        } else {
+        
+
+          count[char] = 1;
         }
-       
-        return acc;
-    })
-}
+      }
+    }
+  
+    return count;
+  }
 
 /*
 Write a function called addKeyAndValue which accepts an array of objects and returns the array of objects passed to it with each object now including the key and value passed to the function.
@@ -84,14 +88,14 @@ Examples:
     
     partition(names, isLongerThanThreeCharacters) // [['Elie', 'Colt', 'Matt'], ['Tim']]
 */
-
-function partition(arr, callback) {
-    return arr.reduce(function(acc, next){
-        if ( callback(next)){
-            acc[0].push(next);
-        }else{
-            acc[1].push(next);
-        }
-        return acc;
-    });
-}
+    function partition(arr, callback) {
+        return arr.reduce((result, value) => {
+          if (callback(value)) {
+            result[0].push(value);
+          } else {
+            result[1].push(value); 
+          }
+          return result;
+        }, [[], []]); 
+      }
+      
